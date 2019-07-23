@@ -1,13 +1,13 @@
 import React from "react";
 import CardTitle from "./CardTitle";
 
-const CardWrapper = () => {
+const Card = () => {
   return (
     <div>
       <CardTitle />
-      CardWrapper here
+      Card here
     </div>
   );
 };
 
-export default CardWrapper;
+export default Card;

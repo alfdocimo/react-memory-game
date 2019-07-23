@@ -3,7 +3,7 @@ import Card from "./components/Card";
 import constants from "./constants";
 import axios from "axios";
 
-import Cards from "./containers/Cards";
+import Cards from "./containers/CardsContainer";
 
 const { API } = constants;
 const App = () => {
