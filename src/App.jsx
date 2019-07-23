@@ -1,13 +1,24 @@
-import React, { useEffect } from "react";
-import Card from "./components/Card";
-import constants from "./constants";
-import axios from "axios";
+import React from "react";
+import { createGlobalStyle } from "styled-components";
+import tokens from "./StyleConfigs";
 
-import Cards from "./containers/CardsContainer";
+import CardsContainer from "./containers/CardsContainer";
 
-const { API } = constants;
+const GlobalStyle = createGlobalStyle`
+  body {
+    @import url('https://fonts.googleapis.com/css?family=Cinzel+Decorative&display=swap');
+    margin: 0;
+    background-color:${tokens.colors.mainBlue};
+  }
+`;
+
 const App = () => {
-  return <Cards />;
+  return (
+    <>
+      <CardsContainer />
+      <GlobalStyle />
+    </>
+  );
 };
 
 export default App;

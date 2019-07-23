@@ -4,11 +4,18 @@ import axios from "axios";
 import constants from "../constants";
 import mapDataToCards from "../helpers";
 import Card from "../components/Card";
+import styled from "styled-components";
 
 const { API } = constants;
 
 const CardsContainer = props => {
   const [cardData, setCardData] = useState([]);
+  const StyledContainer = styled.div`
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-items: center;
+    grid-gap: 30px;
+  `;
 
   useEffect(() => {
     for (let index = 0; index < 9; index++) {
@@ -19,10 +26,15 @@ const CardsContainer = props => {
   }, []);
 
   const _mapCards = () => {
-    return cardData.length > 0 && cardData.map(x => <Card />);
+    return (
+      cardData.length > 0 &&
+      cardData.map(({ name, picture, id }) => (
+        <Card title={name} picture={picture} key={id} />
+      ))
+    );
   };
 
-  return <div>{_mapCards()}</div>;
+  return <StyledContainer>{_mapCards()}</StyledContainer>;
 };
 const mapStateToProps = state => {
   const { cardsList = "" } = state;

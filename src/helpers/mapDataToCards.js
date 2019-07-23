@@ -1,6 +1,6 @@
 const mapDataToCards = data => {
-  const { picture, name, job, gender } = data;
-  return { picture, name, job, gender };
+  const { picture, name, job, id } = data;
+  return { picture, name, job, id };
 };
 
 export default mapDataToCards;
