@@ -18,6 +18,11 @@ const Card = ({ title, picture, footnote, gender }) => {
     height: 250px;
     box-shadow: 0px 25px 20px -15px rgba(214, 93, 177, 1);
     border-radius: ${tokens.gutters.m};
+    transition: all 0.15s ease-in-out;
+
+    : hover {
+      transform: scale(1.1);
+    }
   `;
 
   return (
