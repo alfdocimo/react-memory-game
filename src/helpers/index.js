@@ -1,2 +1,4 @@
 import mapDataToCards from "./mapDataToCards";
-export default mapDataToCards;
+import generateCardSequence from "./generateCardSequence";
+
+export { mapDataToCards, generateCardSequence };

@@ -1,17 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import axios from "axios";
-import constants from "../constants";
-import mapDataToCards from "../helpers";
+import { API } from "../constants";
+import { mapDataToCards, generateCardSequence } from "../helpers";
 import Card from "../components/Card";
 import styled from "styled-components";
 import tokens from "../StyleConfigs";
 
 import { addCardToList } from "../actions";
+const randomCardSequence = generateCardSequence(3);
 
-const { API } = constants;
-
-const CardsContainer = ({ addCardToList }) => {
+const CardsContainer = ({ addCardToList, cardsList }) => {
   const [cardData, setCardData] = useState([]);
   const StyledContainer = styled.div`
     display: grid;
@@ -28,6 +27,14 @@ const CardsContainer = ({ addCardToList }) => {
       });
     }
   }, []);
+
+  useEffect(() => {
+    console.log("RANDOM:", randomCardSequence);
+    console.log("MAIN:", cardsList);
+    if (JSON.stringify([cardsList]) === JSON.stringify([randomCardSequence])) {
+      console.log("WON!");
+    }
+  }, [cardsList]);
 
   const _mapCards = () => {
     return (
