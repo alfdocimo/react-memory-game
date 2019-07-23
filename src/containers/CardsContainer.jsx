@@ -8,10 +8,11 @@ import styled from "styled-components";
 import tokens from "../StyleConfigs";
 
 import { addCardToList } from "../actions";
-const randomCardSequence = generateCardSequence(3);
 
 const CardsContainer = ({ addCardToList, cardsList }) => {
   const [cardData, setCardData] = useState([]);
+  const [randomCardSequence] = useState(generateCardSequence(3));
+
   const StyledContainer = styled.div`
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
