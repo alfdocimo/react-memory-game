@@ -3,7 +3,7 @@ import CardTitle from "./CardTitle";
 import styled from "styled-components";
 import tokens from "../../StyleConfigs";
 
-const Card = ({ title, picture, footnote, gender }) => {
+const Card = ({ title, picture, onClick, footnote, gender }) => {
   const StyledContent = styled.div`
     width: 50%;
     display: flex;
@@ -11,6 +11,7 @@ const Card = ({ title, picture, footnote, gender }) => {
     flex-direction: column;
     align-items: center;
     background-image: url(${picture});
+    background-size: 150px;
     background-color: ${tokens.colors.white};
     background-position: top;
     background-repeat: no-repeat;
@@ -26,7 +27,7 @@ const Card = ({ title, picture, footnote, gender }) => {
   `;
 
   return (
-    <StyledContent>
+    <StyledContent onClick={onClick}>
       <CardTitle title={title} />
     </StyledContent>
   );

@@ -7,9 +7,11 @@ import Card from "../components/Card";
 import styled from "styled-components";
 import tokens from "../StyleConfigs";
 
+import { addCardToList } from "../actions";
+
 const { API } = constants;
 
-const CardsContainer = props => {
+const CardsContainer = ({ addCardToList }) => {
   const [cardData, setCardData] = useState([]);
   const StyledContainer = styled.div`
     display: grid;
@@ -30,8 +32,13 @@ const CardsContainer = props => {
   const _mapCards = () => {
     return (
       cardData.length > 0 &&
-      cardData.map(({ name, picture, id }) => (
-        <Card title={name} picture={picture} key={id} />
+      cardData.map(({ name, picture, id }, index) => (
+        <Card
+          title={name}
+          picture={picture}
+          key={id}
+          onClick={() => addCardToList(index)}
+        />
       ))
     );
   };
@@ -39,7 +46,15 @@ const CardsContainer = props => {
   return <StyledContainer>{_mapCards()}</StyledContainer>;
 };
 const mapStateToProps = state => {
-  const { cardsList = "" } = state;
+  const { cardsList } = state;
   return { cardsList };
 };
-export default connect(mapStateToProps)(CardsContainer);
+
+const mapDispatchToProps = dispatch => ({
+  addCardToList: index => dispatch(addCardToList(index))
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CardsContainer);
