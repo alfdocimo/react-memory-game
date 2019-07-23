@@ -5,6 +5,7 @@ import constants from "../constants";
 import mapDataToCards from "../helpers";
 import Card from "../components/Card";
 import styled from "styled-components";
+import tokens from "../StyleConfigs";
 
 const { API } = constants;
 
@@ -14,7 +15,8 @@ const CardsContainer = props => {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     justify-items: center;
-    grid-gap: 30px;
+    grid-gap: ${tokens.gutters.l};
+    margin: 5vh 0;
   `;
 
   useEffect(() => {
