@@ -8,10 +8,15 @@ import styled from "styled-components";
 import tokens from "../StyleConfigs";
 
 import { addCardToList } from "../actions";
+import CardViewer from "../components/CardViewer";
 
 const CardsContainer = ({ addCardToList, cardsList }) => {
   const [cardData, setCardData] = useState([]);
   const [randomCardSequence] = useState(generateCardSequence(3));
+  const [areCardsLoaded, setAreCardsLoaded] = useState(false);
+  const [currentCard, setCurrentCard] = useState(0);
+  const [areCardsShown, setAreCardsShown] = useState(false);
+  const [hasWon, setHasWon] = useState(false);
 
   const StyledContainer = styled.div`
     display: grid;
@@ -33,9 +38,28 @@ const CardsContainer = ({ addCardToList, cardsList }) => {
     console.log("RANDOM:", randomCardSequence);
     console.log("MAIN:", cardsList);
     if (JSON.stringify([cardsList]) === JSON.stringify([randomCardSequence])) {
-      console.log("WON!");
+      setHasWon(true);
     }
   }, [cardsList]);
+
+  useEffect(() => {
+    if (cardData.length === 9) {
+      setAreCardsLoaded(true);
+
+      randomCardSequence.map((x, index) => {
+        setTimeout(() => {
+          setCurrentCard(cardData[x]);
+          console.log(index, randomCardSequence.length);
+          if (index + 1 === randomCardSequence.length) {
+            setTimeout(() => {
+              console.log("done!");
+              setAreCardsShown(true);
+            }, 2000);
+          }
+        }, 1000 * index);
+      });
+    }
+  }, [cardData]);
 
   const _mapCards = () => {
     return (
@@ -50,8 +74,20 @@ const CardsContainer = ({ addCardToList, cardsList }) => {
       ))
     );
   };
-
-  return <StyledContainer>{_mapCards()}</StyledContainer>;
+  console.log(currentCard);
+  return (
+    <>
+      {hasWon && <CardViewer>You're awesome!</CardViewer>}
+      {areCardsLoaded && !areCardsShown && (
+        <CardViewer>
+          {<Card title={currentCard.name} picture={currentCard.picture} />}
+        </CardViewer>
+      )}
+      <StyledContainer>
+        {areCardsLoaded ? _mapCards() : "loading..."}
+      </StyledContainer>
+    </>
+  );
 };
 const mapStateToProps = state => {
   const { cardsList } = state;

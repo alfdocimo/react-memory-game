@@ -3,9 +3,9 @@ import CardTitle from "./CardTitle";
 import styled from "styled-components";
 import tokens from "../../StyleConfigs";
 
-const Card = ({ title, picture, onClick, footnote, gender }) => {
+const Card = ({ title, picture, onClick, isActive }) => {
   const StyledContent = styled.div`
-    width: 50%;
+    width: 300px;
     display: flex;
     justify-items: center;
     flex-direction: column;
