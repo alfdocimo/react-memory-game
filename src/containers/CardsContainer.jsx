@@ -4,6 +4,7 @@ import axios from "axios";
 import { API } from "../constants";
 import { mapDataToCards, generateCardSequence } from "../helpers";
 import Card from "../components/Card";
+import GamePanel from "../components/GamePanel";
 import styled from "styled-components";
 import tokens from "../StyleConfigs";
 
@@ -34,6 +35,7 @@ const CardsContainer = ({
     justify-items: center;
     grid-gap: ${tokens.gutters.l};
     margin: 5vh 0;
+    width: 70%;
   `;
 
   const StyledBanner = styled.h1`
@@ -69,15 +71,20 @@ const CardsContainer = ({
     border-radius: 15px;
     color: white;
     padding: 20px;
+    box-shadow: 0px 25px 20px -15px rgba(214, 93, 177, 1);
     transition: all 0.15s ease-in-out;
 
     : hover {
       transform: scale(1.1);
-      border: thin solid ${tokens.colors.jhansi};
-      color: ${tokens.colors.jhansi};
+      color: ${tokens.colors.arad};
       background-image: none;
       background-color: ${tokens.colors.white};
     }
+  `;
+
+  const StyledRootContainer = styled.div`
+    display: flex;
+    align-items: center;
   `;
 
   useEffect(() => {
@@ -170,15 +177,24 @@ const CardsContainer = ({
           {<Card title={currentCard.name} picture={currentCard.picture} />}
         </Viewer>
       )}
-      <StyledContainer>
-        {areCardsLoaded ? (
-          _mapCards()
-        ) : (
-          <Viewer>
-            <HasWonStyledBanner>Loading...please wait! ⌛</HasWonStyledBanner>
-          </Viewer>
+      <StyledRootContainer>
+        <StyledContainer>
+          {areCardsLoaded ? (
+            _mapCards()
+          ) : (
+            <Viewer>
+              <HasWonStyledBanner>Loading...please wait! ⌛</HasWonStyledBanner>
+            </Viewer>
+          )}
+        </StyledContainer>
+        {areCardsShown && (
+          <GamePanel
+            currentRound={round}
+            resetSelected={resetCardList}
+            leftToSelect={randomCardSequence.length - cardsList.length}
+          />
         )}
-      </StyledContainer>
+      </StyledRootContainer>
     </>
   );
 };

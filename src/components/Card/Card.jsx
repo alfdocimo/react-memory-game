@@ -11,11 +11,10 @@ const Card = ({ title, picture, onClick, isActive }) => {
     flex-direction: column;
     align-items: center;
     background-image: url(${picture});
-    background-size: 150px;
+    background-size: 300px;
     background-color: ${tokens.colors.white};
-    background-position: top;
+    background-position: 0px 50px;
     background-repeat: no-repeat;
-    background-size: cover;
     height: 250px;
     box-shadow: 0px 25px 20px -15px rgba(214, 93, 177, 1);
     border-radius: ${tokens.gutters.m};
