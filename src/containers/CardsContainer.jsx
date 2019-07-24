@@ -56,6 +56,30 @@ const CardsContainer = ({
     }
   };
 
+  const StyledButton = styled.button`
+    background-image: linear-gradient(
+      to right,
+      ${tokens.colors.jhansi},
+      ${tokens.colors.arad}
+    );
+    font-family: "Cinzel Decorative", cursive;
+    font-size: 50px;
+    display: block;
+    border: none;
+    border-radius: 15px;
+    color: white;
+    padding: 20px;
+    transition: all 0.15s ease-in-out;
+
+    : hover {
+      transform: scale(1.1);
+      border: thin solid ${tokens.colors.jhansi};
+      color: ${tokens.colors.jhansi};
+      background-image: none;
+      background-color: ${tokens.colors.white};
+    }
+  `;
+
   useEffect(() => {
     fetchCardsData();
   }, []);
@@ -128,13 +152,17 @@ const CardsContainer = ({
       {hasWon && (
         <Viewer>
           <HasWonStyledBanner>You're awesome!🎉🤩</HasWonStyledBanner>
-          <button onClick={() => _handleAddRound()}>next round</button>
+          <StyledButton onClick={() => _handleAddRound()}>
+            Next round!
+          </StyledButton>
         </Viewer>
       )}
       {hasFailed && (
         <Viewer>
           <HasLostStyledBanner>Try again? 🤔</HasLostStyledBanner>
-          <button onClick={() => _handleAddRound(false)}>Reset round</button>
+          <StyledButton onClick={() => _handleAddRound(false)}>
+            Sure!
+          </StyledButton>
         </Viewer>
       )}
       {areCardsLoaded && !areCardsShown && (

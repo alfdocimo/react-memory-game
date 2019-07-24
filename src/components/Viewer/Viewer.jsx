@@ -10,6 +10,7 @@ const CardViewer = ({ children }) => {
   justify-content: center;
   align-items: center;
   background: #fff;
+  flex-direction: column;
 }
   `;
 
