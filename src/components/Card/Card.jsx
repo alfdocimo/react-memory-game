@@ -3,7 +3,7 @@ import CardTitle from "./CardTitle";
 import styled from "styled-components";
 import tokens from "../../StyleConfigs";
 
-const Card = ({ title, picture, onClick, isActive }) => {
+const Card = ({ title, picture, onClick }) => {
   const StyledContent = styled.div`
     width: 300px;
     display: flex;

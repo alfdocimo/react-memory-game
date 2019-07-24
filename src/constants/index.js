@@ -1,4 +1,4 @@
-import characters from "./characters";
+import messages from "./messages";
 import API from "./API";
 
-export { characters, API };
+export { messages, API };

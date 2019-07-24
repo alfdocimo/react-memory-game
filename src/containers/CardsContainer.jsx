@@ -1,10 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import axios from "axios";
-import { API } from "../constants";
-import { mapDataToCards, generateCardSequence } from "../helpers";
+import { API, messages } from "../constants";
+import {
+  mapDataToCards,
+  generateCardSequence,
+  getRandomFromRange
+} from "../helpers";
 import Card from "../components/Card";
 import GamePanel from "../components/GamePanel";
+import Button from "../components/Button";
+import Banner from "../components/Banner";
 import styled from "styled-components";
 import tokens from "../StyleConfigs";
 
@@ -38,18 +44,6 @@ const CardsContainer = ({
     width: 70%;
   `;
 
-  const StyledBanner = styled.h1`
-    font-family: "Cinzel Decorative", cursive;
-    font-size: 100px;
-  `;
-
-  const HasWonStyledBanner = styled(StyledBanner)`
-    color: ${tokens.colors.arad};
-  `;
-  const HasLostStyledBanner = styled(StyledBanner)`
-    color: ${tokens.colors.jhansi};
-  `;
-
   const fetchCardsData = () => {
     for (let index = 0; index < 9; index++) {
       axios.get(API.randomCharacter).then(({ data }) => {
@@ -57,30 +51,6 @@ const CardsContainer = ({
       });
     }
   };
-
-  const StyledButton = styled.button`
-    background-image: linear-gradient(
-      to right,
-      ${tokens.colors.jhansi},
-      ${tokens.colors.arad}
-    );
-    font-family: "Cinzel Decorative", cursive;
-    font-size: 50px;
-    display: block;
-    border: none;
-    border-radius: 15px;
-    color: white;
-    padding: 20px;
-    box-shadow: 0px 25px 20px -15px rgba(214, 93, 177, 1);
-    transition: all 0.15s ease-in-out;
-
-    : hover {
-      transform: scale(1.1);
-      color: ${tokens.colors.arad};
-      background-image: none;
-      background-color: ${tokens.colors.white};
-    }
-  `;
 
   const StyledRootContainer = styled.div`
     display: flex;
@@ -104,8 +74,6 @@ const CardsContainer = ({
   }, [cardsList]);
 
   useEffect(() => {
-    console.log(cardsList);
-    console.log(randomCardSequence);
     if (cardData.length === 9) {
       setAreCardsLoaded(true);
 
@@ -153,23 +121,26 @@ const CardsContainer = ({
     fetchCardsData();
     resetCardList();
   };
-  console.log("round", round);
   return (
     <>
       {hasWon && (
         <Viewer>
-          <HasWonStyledBanner>You're awesome!🎉🤩</HasWonStyledBanner>
-          <StyledButton onClick={() => _handleAddRound()}>
+          <Banner color="primary" fontSize={100}>
+            {messages.win[getRandomFromRange(messages.win)]}🎉🤩
+          </Banner>
+          <Button fontSize={50} onClick={() => _handleAddRound()}>
             Next round!
-          </StyledButton>
+          </Button>
         </Viewer>
       )}
       {hasFailed && (
         <Viewer>
-          <HasLostStyledBanner>Try again? 🤔</HasLostStyledBanner>
-          <StyledButton onClick={() => _handleAddRound(false)}>
-            Sure!
-          </StyledButton>
+          <Banner color="secondary" fontSize={100}>
+            {messages.lose[getRandomFromRange(messages.lose)]}🤔
+          </Banner>
+          <Button fontSize={50} onClick={() => _handleAddRound(false)}>
+            Try again?
+          </Button>
         </Viewer>
       )}
       {areCardsLoaded && !areCardsShown && (
@@ -183,7 +154,9 @@ const CardsContainer = ({
             _mapCards()
           ) : (
             <Viewer>
-              <HasWonStyledBanner>Loading...please wait! ⌛</HasWonStyledBanner>
+              <Banner color="primary" fontSize={100}>
+                Loading...please wait! ⌛
+              </Banner>
             </Viewer>
           )}
         </StyledContainer>
