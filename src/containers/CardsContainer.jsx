@@ -17,6 +17,7 @@ const CardsContainer = ({ addCardToList, cardsList }) => {
   const [currentCard, setCurrentCard] = useState(0);
   const [areCardsShown, setAreCardsShown] = useState(false);
   const [hasWon, setHasWon] = useState(false);
+  const [hasFailed, setHasFailed] = useState(false);
 
   const StyledContainer = styled.div`
     display: grid;
@@ -39,6 +40,12 @@ const CardsContainer = ({ addCardToList, cardsList }) => {
     console.log("MAIN:", cardsList);
     if (JSON.stringify([cardsList]) === JSON.stringify([randomCardSequence])) {
       setHasWon(true);
+    }
+    if (
+      cardsList.length === randomCardSequence.length &&
+      JSON.stringify([cardsList]) !== JSON.stringify([randomCardSequence])
+    ) {
+      setHasFailed(true);
     }
   }, [cardsList]);
 
@@ -78,6 +85,7 @@ const CardsContainer = ({ addCardToList, cardsList }) => {
   return (
     <>
       {hasWon && <CardViewer>You're awesome!</CardViewer>}
+      {hasFailed && <CardViewer>You suck boi</CardViewer>}
       {areCardsLoaded && !areCardsShown && (
         <CardViewer>
           {<Card title={currentCard.name} picture={currentCard.picture} />}
