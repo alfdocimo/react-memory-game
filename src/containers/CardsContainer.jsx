@@ -7,12 +7,21 @@ import Card from "../components/Card";
 import styled from "styled-components";
 import tokens from "../StyleConfigs";
 
-import { addCardToList } from "../actions";
+import { addCardToList, addRound, resetRound, resetCardList } from "../actions";
 import Viewer from "../components/Viewer";
 
-const CardsContainer = ({ addCardToList, cardsList }) => {
+const CardsContainer = ({
+  addCardToList,
+  cardsList,
+  resetCardList,
+  round,
+  addRound,
+  resetRound
+}) => {
   const [cardData, setCardData] = useState([]);
-  const [randomCardSequence] = useState(generateCardSequence(3));
+  const [randomCardSequence, setRandomCardSequence] = useState(
+    generateCardSequence(3)
+  );
   const [areCardsLoaded, setAreCardsLoaded] = useState(false);
   const [currentCard, setCurrentCard] = useState(0);
   const [areCardsShown, setAreCardsShown] = useState(false);
@@ -39,17 +48,19 @@ const CardsContainer = ({ addCardToList, cardsList }) => {
     color: ${tokens.colors.jhansi};
   `;
 
-  useEffect(() => {
+  const fetchCardsData = () => {
     for (let index = 0; index < 9; index++) {
       axios.get(API.randomCharacter).then(({ data }) => {
         setCardData(cardData => [...cardData, mapDataToCards(data)]);
       });
     }
+  };
+
+  useEffect(() => {
+    fetchCardsData();
   }, []);
 
   useEffect(() => {
-    console.log("RANDOM:", randomCardSequence);
-    console.log("MAIN:", cardsList);
     if (JSON.stringify([cardsList]) === JSON.stringify([randomCardSequence])) {
       setHasWon(true);
     }
@@ -62,16 +73,16 @@ const CardsContainer = ({ addCardToList, cardsList }) => {
   }, [cardsList]);
 
   useEffect(() => {
+    console.log(cardsList);
+    console.log(randomCardSequence);
     if (cardData.length === 9) {
       setAreCardsLoaded(true);
 
       randomCardSequence.map((x, index) => {
         setTimeout(() => {
           setCurrentCard(cardData[x]);
-          console.log(index, randomCardSequence.length);
           if (index + 1 === randomCardSequence.length) {
             setTimeout(() => {
-              console.log("done!");
               setAreCardsShown(true);
             }, 2000);
           }
@@ -93,17 +104,37 @@ const CardsContainer = ({ addCardToList, cardsList }) => {
       ))
     );
   };
-  console.log(currentCard);
+
+  const _handleAddRound = (isNewRound = true) => {
+    if (isNewRound) {
+      addRound();
+      setRandomCardSequence(generateCardSequence(round + 3));
+    } else {
+      resetRound();
+      setRandomCardSequence(generateCardSequence(3));
+    }
+    setCardData([]);
+    setAreCardsLoaded(false);
+    setAreCardsShown(false);
+    setHasWon(false);
+    setHasFailed(false);
+    setCurrentCard(0);
+    fetchCardsData();
+    resetCardList();
+  };
+  console.log("round", round);
   return (
     <>
       {hasWon && (
         <Viewer>
           <HasWonStyledBanner>You're awesome!🎉🤩</HasWonStyledBanner>
+          <button onClick={() => _handleAddRound()}>next round</button>
         </Viewer>
       )}
       {hasFailed && (
         <Viewer>
           <HasLostStyledBanner>Try again? 🤔</HasLostStyledBanner>
+          <button onClick={() => _handleAddRound(false)}>Reset round</button>
         </Viewer>
       )}
       {areCardsLoaded && !areCardsShown && (
@@ -116,7 +147,7 @@ const CardsContainer = ({ addCardToList, cardsList }) => {
           _mapCards()
         ) : (
           <Viewer>
-            <HasWonStyledBanner>Loading...please wait! ⌛ </HasWonStyledBanner>
+            <HasWonStyledBanner>Loading...please wait! ⌛</HasWonStyledBanner>
           </Viewer>
         )}
       </StyledContainer>
@@ -124,12 +155,15 @@ const CardsContainer = ({ addCardToList, cardsList }) => {
   );
 };
 const mapStateToProps = state => {
-  const { cardsList } = state;
-  return { cardsList };
+  const { cardsList, round } = state;
+  return { cardsList, round };
 };
 
 const mapDispatchToProps = dispatch => ({
-  addCardToList: index => dispatch(addCardToList(index))
+  addCardToList: index => dispatch(addCardToList(index)),
+  addRound: () => dispatch(addRound()),
+  resetRound: () => dispatch(resetRound()),
+  resetCardList: () => dispatch(resetCardList())
 });
 
 export default connect(
