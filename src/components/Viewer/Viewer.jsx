@@ -1,9 +1,8 @@
 import React from "react";
-import Card from "../Card";
 import styled from "styled-components";
 
 const CardViewer = ({ children }) => {
-  const StyledCardViewer = styled.div`
+  const StyledViewer = styled.div`
   width: 100%;
   height: 100%;
   position: absolute;
@@ -14,7 +13,7 @@ const CardViewer = ({ children }) => {
 }
   `;
 
-  return <StyledCardViewer>{children}</StyledCardViewer>;
+  return <StyledViewer>{children}</StyledViewer>;
 };
 
 export default CardViewer;

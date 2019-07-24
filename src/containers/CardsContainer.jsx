@@ -8,7 +8,7 @@ import styled from "styled-components";
 import tokens from "../StyleConfigs";
 
 import { addCardToList } from "../actions";
-import CardViewer from "../components/CardViewer";
+import Viewer from "../components/Viewer";
 
 const CardsContainer = ({ addCardToList, cardsList }) => {
   const [cardData, setCardData] = useState([]);
@@ -25,6 +25,18 @@ const CardsContainer = ({ addCardToList, cardsList }) => {
     justify-items: center;
     grid-gap: ${tokens.gutters.l};
     margin: 5vh 0;
+  `;
+
+  const StyledBanner = styled.h1`
+    font-family: "Cinzel Decorative", cursive;
+    font-size: 100px;
+  `;
+
+  const HasWonStyledBanner = styled(StyledBanner)`
+    color: ${tokens.colors.arad};
+  `;
+  const HasLostStyledBanner = styled(StyledBanner)`
+    color: ${tokens.colors.jhansi};
   `;
 
   useEffect(() => {
@@ -84,15 +96,29 @@ const CardsContainer = ({ addCardToList, cardsList }) => {
   console.log(currentCard);
   return (
     <>
-      {hasWon && <CardViewer>You're awesome!</CardViewer>}
-      {hasFailed && <CardViewer>You suck boi</CardViewer>}
+      {hasWon && (
+        <Viewer>
+          <HasWonStyledBanner>You're awesome!🎉🤩</HasWonStyledBanner>
+        </Viewer>
+      )}
+      {hasFailed && (
+        <Viewer>
+          <HasLostStyledBanner>Try again? 🤔</HasLostStyledBanner>
+        </Viewer>
+      )}
       {areCardsLoaded && !areCardsShown && (
-        <CardViewer>
+        <Viewer>
           {<Card title={currentCard.name} picture={currentCard.picture} />}
-        </CardViewer>
+        </Viewer>
       )}
       <StyledContainer>
-        {areCardsLoaded ? _mapCards() : "loading..."}
+        {areCardsLoaded ? (
+          _mapCards()
+        ) : (
+          <Viewer>
+            <HasWonStyledBanner>Loading...please wait! ⌛ </HasWonStyledBanner>
+          </Viewer>
+        )}
       </StyledContainer>
     </>
   );
