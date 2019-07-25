@@ -1,0 +1,15 @@
+language: node_js
+dist: trusty
+cache:
+  yarn: true
+  directories:
+    - node_modules
+
+node_js:
+  - node
+
+install:
+  - yarn
+
+script:
+  - yarn test
