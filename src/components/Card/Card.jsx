@@ -26,8 +26,8 @@ const Card = ({ title, picture, onClick }) => {
   `;
 
   return (
-    <StyledContent onClick={onClick}>
-      <CardTitle title={title} />
+    <StyledContent data-test-id="card" onClick={onClick}>
+      <CardTitle data-test-id="card-title" title={title} />
     </StyledContent>
   );
 };

@@ -14,7 +14,7 @@ const CardViewer = ({ children }) => {
 }
   `;
 
-  return <StyledViewer>{children}</StyledViewer>;
+  return <StyledViewer data-test-id="card-viewer" >{children}</StyledViewer>;
 };
 
 export default CardViewer;
