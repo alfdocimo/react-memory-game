@@ -11,7 +11,7 @@ const GamePanel = ({ currentRound, resetSelected, leftToSelect }) => {
       <Banner fontSize={25} color="secondary">
         💭You have {leftToSelect} cards left!
       </Banner>
-      <Button fontSize={30} onClick={() => resetSelected()}>
+      <Button data-test-id="button-reselect" fontSize={30} onClick={() => resetSelected()}>
         Reset!
       </Button>
     </div>

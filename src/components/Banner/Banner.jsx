@@ -25,7 +25,7 @@ const Banner = ({ fontSize, children, color }) => {
     color: ${bannerColor};
   `;
 
-  return <StyledBanner>{children}</StyledBanner>;
+  return <StyledBanner data-test-id="banner" >{children}</StyledBanner>;
 };
 
 export default Banner;
