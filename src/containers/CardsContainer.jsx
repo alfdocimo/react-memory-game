@@ -149,7 +149,7 @@ const CardsContainer = ({
         </Viewer>
       )}
       <StyledRootContainer>
-        <StyledContainer>
+        <StyledContainer data-test-id="main-card-container">
           {areCardsLoaded ? (
             _mapCards()
           ) : (
