@@ -13,7 +13,8 @@ const defaultStore = {
   hasWon: false,
   hasFailed: false,
   cardData: [{ picture: "random", name: "JohnDoe", id: 0 }],
-  randomCardSequence: [2, 3, 5, 1, 6]
+  randomCardSequence: [2, 3, 5, 1, 6],
+  cardsShown: 0
 };
 const mockedStore = configureMockStore()(defaultStore);
 

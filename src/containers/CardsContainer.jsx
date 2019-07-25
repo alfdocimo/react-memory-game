@@ -34,6 +34,7 @@ const CardsContainer = ({
   const [areCardsShown, setAreCardsShown] = useState(false);
   const [hasWon, setHasWon] = useState(false);
   const [hasFailed, setHasFailed] = useState(false);
+  const [cardsShown, setCardsShown] = useState(0);
 
   const StyledContainer = styled.div`
     display: grid;
@@ -76,10 +77,11 @@ const CardsContainer = ({
   useEffect(() => {
     if (cardData.length === 9) {
       setAreCardsLoaded(true);
-
+      
       randomCardSequence.map((x, index) => {
         setTimeout(() => {
           setCurrentCard(cardData[x]);
+          setCardsShown(cardsShown => cardsShown + 1);
           if (index + 1 === randomCardSequence.length) {
             setTimeout(() => {
               setAreCardsShown(true);
@@ -120,6 +122,7 @@ const CardsContainer = ({
     setCurrentCard(0);
     fetchCardsData();
     resetCardList();
+    setCardsShown(0);
   };
   return (
     <>
@@ -145,6 +148,9 @@ const CardsContainer = ({
       )}
       {areCardsLoaded && !areCardsShown && (
         <Viewer>
+          <Banner color="primary" fontSize={40}>
+            {`Card nº ${cardsShown}`}
+          </Banner>
           {<Card title={currentCard.name} picture={currentCard.picture} />}
         </Viewer>
       )}
