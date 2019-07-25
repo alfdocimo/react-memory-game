@@ -27,7 +27,11 @@ const Button = ({ fontSize, children, onClick }) => {
     }
   `;
 
-  return <StyledButton onClick={() => onClick()}>{children}</StyledButton>;
+  return (
+    <StyledButton data-test-id="button" onClick={() => onClick()}>
+      {children}
+    </StyledButton>
+  );
 };
 
 export default Button;
