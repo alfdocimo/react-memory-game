@@ -1,45 +1,77 @@
-# Sequence memory game
-The player has to pick the correct items in the order shown
+[![Build Status](https://travis-ci.org/alfdocimo/letgo-fullstack-test.svg?branch=master)](https://travis-ci.org/alfdocimo/letgo-fullstack-test)
 
-## Introduction
-Welcome to the Letgo Fullstack technical test!
+# Sequence Final Fantasy Memory Game
 
-For this test we want to see your skills and knowledge by developing a small and fun game: **Sequence memory game**.
+Hey there! Glad you're reading this😊
 
-We expect from you clean and well structured code.
+The following contains a test for a position at _letgo_, and I gotta say I had a lot of fun doing this!
 
-## The Game
-Each round adds one random item to the end of the sequence. When the sequence is finished the player has to click on the items in the order shown to pass to the next round.
+Originally I was going to go with the pokeapi, but wanted to try something else instead, so Final Fantasy it is!
 
-#### Example
-We have 4 items, lets say: **Dog, Cat, Horse and Frog**:
-* the **first round Cat is highlighted** and the **user should click on Cat** to pass to the next round.
-* for the **second round Cat is highlighted and then Dog**, so the **user should click on Cat and then Dog**.
-* for the **third round Cat is highlighted, then Dog and then Cat again** (because it is random, so items can be repeated), so the **user should click on Cat, then Dog and then Cat again** to pass to the next round.
+Okay, let's start with what I have used for this:
 
-This is a video of another example about this game but with colors: [youtube video](https://www.youtube.com/watch?v=1Yqj76Q4jJ4)
+## React, of course!
 
-## Requirements
-You should use this project to develop your solution and use **React with Redux** (they are added in `package.json` file along with **redux-thunk, react-dom, and react-redux**)
+Because functional programming is awesome and because I really like using it. (Also because it's part of the stack that is being used at letgo)
 
-For us is important that the candidates have **strong styling knowledge** so we expect from you an **attractive and responsive** solution (no ui frameworks like bootstrap, material-ui...)
+## styled-components
 
-You can use your favourite style library/preprocessor such a **less, stylus, sass or any CSS-in-JS**...we use **[styled-components](https://www.styled-components.com/)**. Bear in mind that depending on the tool you choose you may need to add some configuration to the **webpack.config.js** file.
+Never heard of this before but it GOT ME HOOKED! really, I will use this for side-projects from now on👌
 
-The **items should be fetched from a public API** like [https://pokeapi.co/](https://pokeapi.co/). You can find many of them in the following repository: [Public APIs list](https://github.com/toddmotto/public-apis).
+## Jest & Enzyme
 
-The API chosen should allow you to **fetch a specific number of items**. For example, with the **pokeapi** you can call `https://pokeapi.co/api/v2/pokemon?limit=9` which returns the first 9 pokemon. The number of items is up to you, but should be more than 3. You can use your favourite **library for fetching data**. We use **[axios](https://github.com/axios/axios)**.
+I wanted to try `react-testing-library` because I've heard awesome things about it, and because it has a very friendly API. However, I've been using Jest & Enzyme for a while and gotta say, I can't complain.
 
-**[Javascript standard style](https://standardjs.com/)** is also installed and it will be run each time you commit something. We want to see how you adapt your code by working with a different style guide.
+## API
 
-Additional features are very welcome :)
+moogleapi, because Final Fantasy is one of my favorite games ever🔥
 
-## How to deliver
-Compress your solution (without the `/node_modules` and `/build` folders) and send us the zip file
+## Redux
 
-## How to run the project
-* Install the dependencies by running `yarn install`
-* Launch dev server by running `yarn start`
-* To create the production bundle just run `yarn build`
+Been a very huge fan of Redux for a while... But then - Hooks happened! You will find that I've mixed both Hooks and Redux store for this App, because they really can coexist without much trouble. Also! No class-based components here. Not saying that's good or bad! I just like it better.
 
-If for your final solution we need to run something else (like `yarn test` for unit testing for example) please add it here :)
+## TravisCI
+
+Because CI/CD it's a great thing to know! And I've always been fond of having a deep connection with my DevOps folks.
+
+# How does it work?
+
+Okay! Glad you got here. Hope I haven't bored you yet!
+
+So this a _variation_ from the original _Simon_ game. I wanted to go with a 9x9 grid filled with FF characters.
+
+To get the game started just run:
+
+`yarn start`
+
+and hop over to `http://localhost:8080/`
+
+(So one of the things, among others that I would improve is that I'm missing a <Start game> button, because the game starts right away).
+
+So it's simple:
+
+The game will show you 3 cards, then it will show all 9 cards on the deck and you get to chose which of the 3 cards were the ones that were shown at the beginning.
+
+If you get the 3 cards right, you move to the next round. So it will be a sequence of 4 cards out of the 9 cards instead of 3. And then the next round 5... and so on!
+
+If you think you got the sequence wrong, you can hit the reset button to reset the count at any time! Just remember that cards are only *shown once* 😎
+
+And that's pretty much it!
+
+### Things I wish I had time to improve:
+
+## More testing
+
+Because really, there is no such things as _too much testing_
+
+## Current bugs
+
+* Given that I'm currently fetching an endpoint of the API that returns a random character, this character could be repeated!
+
+* No start button, the game starts immediately. (Sorry about this one, I was too excited and forgot)
+
+## Visual enhancements
+
+* Animations! because they make everything better to be honest.
+
+And that's pretty much it. Hope you like it!
