@@ -24,7 +24,7 @@ it("Its able to set leftToSelect prop", () => {
   expect(wrapper.props().leftToSelect).toEqual(4);
 });
 
-it("Its able to render children", () => {
+it("Its able to callback onClick", () => {
   wrapper
     .find("[data-test-id='button-reselect']")
     .last()

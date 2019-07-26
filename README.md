@@ -64,6 +64,10 @@ And that's pretty much it!
 
 Because really, there is no such things as _too much testing_
 
+I did have most of the Components and part of the main Container tested, so to run that go ahead and hit:
+
+`yarn test`
+
 ## Current bugs
 
 * Given that I'm currently fetching an endpoint of the API that returns a random character, this character could be repeated!
