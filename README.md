@@ -4,7 +4,7 @@
 
 Hey there! Glad you're reading this😊
 
-The following contains a test for a position at _letgo_, and I gotta say I had a lot of fun doing this!
+The following contains a 5-hours-code-test I did to try out hooks, and I gotta say I had a lot of fun doing this!
 
 Originally I was going to go with the pokeapi, but wanted to try something else instead, so Final Fantasy it is!
 
@@ -12,17 +12,17 @@ Okay, let's start with what I have used for this:
 
 ## React, of course!
 
-Because functional programming is awesome and because I really like using it. (Also because it's part of the stack that is being used at letgo)
+Because functional programming is awesome and because I really like using it.
 
 ## styled-components
 
-Never heard of this before but it GOT ME HOOKED! really, I will use this for side-projects from now on👌
+Pretty interesting use of css-in-js library which I really enjoyed using👌
 
 ## Jest & Enzyme
 
 I wanted to try `react-testing-library` because I've heard awesome things about it, and because it has a very friendly API. However, I've been using Jest & Enzyme for a while and gotta say, I can't complain.
 
-## API
+## REST API
 
 moogleapi, because Final Fantasy is one of my favorite games ever🔥
 
@@ -54,7 +54,7 @@ The game will show you 3 cards, then it will show all 9 cards on the deck and yo
 
 If you get the 3 cards right, you move to the next round. So it will be a sequence of 4 cards out of the 9 cards instead of 3. And then the next round 5... and so on!
 
-If you think you got the sequence wrong, you can hit the reset button to reset the count at any time! Just remember that cards are only *shown once* 😎
+If you think you got the sequence wrong, you can hit the reset button to reset the count at any time! Just remember that cards are only _shown once_ 😎
 
 And that's pretty much it!
 
@@ -70,12 +70,12 @@ I did have most of the Components and part of the main Container tested, so to r
 
 ## Current bugs
 
-* Given that I'm currently fetching an endpoint of the API that returns a random character, this character could be repeated!
+- Given that I'm currently fetching an endpoint of the API that returns a random character, this character could be repeated!
 
-* No start button, the game starts immediately. (Sorry about this one, I was too excited and forgot)
+- No start button, the game starts immediately. (Sorry about this one, I was too excited and forgot)
 
 ## Visual enhancements
 
-* Animations! because they make everything better to be honest.
+- Animations! because they make everything better to be honest.
 
 And that's pretty much it. Hope you like it!
