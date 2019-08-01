@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/alfdocimo/letgo-fullstack-test.svg?branch=master)](https://travis-ci.org/alfdocimo/letgo-fullstack-test)
+[![Build Status](https://travis-ci.org/alfdocimo/react-memory-game.svg?branch=master)](https://travis-ci.org/alfdocimo/react-memory-game)
 
 # Sequence Final Fantasy Memory Game
 
